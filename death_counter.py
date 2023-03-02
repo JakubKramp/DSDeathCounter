@@ -1,21 +1,27 @@
 import mss
 import time
+from collections import deque
+from detectors import detect_death, detect_boss, detect_game
+from csv_creator import FileHandler
 
-bounding_box = {'top': 100, 'left': 0, 'width': 400, 'height': 300}
 
 
 i = 0
+cache = deque([], 5)
+f_handler = FileHandler(detect_game())
+f_handler.create_file()
+
 while True:
     with mss.mss() as sct:
-        time.sleep(5)
+        time.sleep(1)
         i += 1
-        # The screen part to capture
-        monitor = {"top": 160, "left": 160, "width": 160, "height": 135}
-        output = f'file{i}'
-
-        # Grab the data
+        monitor = {"top": 650, "left": 460, "width": 1000, "height": 250}
+        output = f'file{i}.jpg'
+        cache.extend([output])
         sct_img = sct.grab(monitor)
-
-        # Save to the picture file
         mss.tools.to_png(sct_img.rgb, sct_img.size, output=output)
-        print(output)
+        if detect_death(output):
+            boss = detect_boss(cache)
+            f_handler.increment_boss(boss)
+
+

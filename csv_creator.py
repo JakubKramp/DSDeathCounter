@@ -1,12 +1,14 @@
 import os
 import json
 
+import constants
+
 
 class FileHandler:
 
-    def __init__(self, game: str, bosses: dict):
+    def __init__(self, game: str):
         self.game = game
-        self.bosses = bosses
+        self.bosses = constants.BOSSES[game]
         self.filename = f'data/{self.game}'
 
     def create_file(self):

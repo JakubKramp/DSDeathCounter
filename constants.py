@@ -4,7 +4,6 @@ GAMES = {
 COORDINATES = {
     'Dark Souls: Prepare to die edition': [0,0,0,0]
 }
-
 DARK_SOULS_BOSSES = {
     'Asylum Demon': 'Asylum Demon',
     'Taurus Demon': 'Taurus Demon',
@@ -34,3 +33,8 @@ DARK_SOULS_BOSSES = {
     'Manus, Father of the Abyss': 'Manus, Father of the Abyss',
     'Other': '',
 }
+
+BOSSES = {'Dark Souls: Prepare to die edition': DARK_SOULS_BOSSES}
+
+BOSS_FUZZ_THRESHOLD = 65
+DEATH_THRESHOLD = 0.47
